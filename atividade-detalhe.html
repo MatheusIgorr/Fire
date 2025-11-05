@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atividade Prática - INSTITUTO FIRE</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="aluno-dashboard.html" class="nav-brand">
+        <i class="fas fa-fire-alt"></i>
+        <span>INSTITUTO FIRE</span>
+      </a>
+      
+      <div class="nav-menu">
+        <a href="aluno-dashboard.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          Dashboard
+        </a>
+        <a href="meus-cursos.html" class="nav-link">
+          <i class="fas fa-book"></i>
+          Meus Cursos
+        </a>
+        <a href="atividades.html" class="nav-link active">
+          <i class="fas fa-tasks"></i>
+          Atividades
+        </a>
+        <a href="certificados.html" class="nav-link">
+          <i class="fas fa-certificate"></i>
+          Certificados
+        </a>
+      </div>
+      
+      <div class="nav-actions">
+        <button onclick="logout()" class="btn btn-outline">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Added prominent back button -->
+      <div class="back-button-container">
+        <a href="atividades.html" class="btn btn-back">
+          <i class="fas fa-arrow-left"></i>
+          Voltar para Atividades
+        </a>
+      </div>
+
+      <div class="lesson-header">
+        <div class="breadcrumb">
+          <a href="aluno-dashboard.html">Dashboard</a>
+          <i class="fas fa-chevron-right"></i>
+          <a href="atividades.html">Atividades</a>
+          <i class="fas fa-chevron-right"></i>
+          <span id="activity-title">Atividade Prática</span>
+        </div>
+        <h1 id="activity-name">Exercício Prático: Técnicas de Resgate</h1>
+        <p id="activity-description">Complete esta atividade prática para demonstrar suas habilidades</p>
+      </div>
+
+      <section class="dashboard-section">
+        <div class="content-box">
+          <div class="activity-instructions">
+            <h2><i class="fas fa-info-circle"></i> Instruções</h2>
+            <p>Esta atividade prática avalia suas habilidades em técnicas de resgate. Leia atentamente as instruções abaixo:</p>
+            
+            <ol class="instructions-list">
+              <li>Assista ao vídeo demonstrativo completo</li>
+              <li>Pratique as técnicas apresentadas</li>
+              <li>Grave um vídeo de 5-10 minutos demonstrando as técnicas</li>
+              <li>Faça upload do vídeo usando o formulário abaixo</li>
+              <li>Aguarde a avaliação do instrutor</li>
+            </ol>
+
+            <div class="activity-requirements">
+              <h3><i class="fas fa-clipboard-list"></i> Requisitos</h3>
+              <ul>
+                <li><i class="fas fa-check"></i> Vídeo em formato MP4 ou MOV</li>
+                <li><i class="fas fa-check"></i> Duração: 5-10 minutos</li>
+                <li><i class="fas fa-check"></i> Qualidade mínima: 720p</li>
+                <li><i class="fas fa-check"></i> Demonstração clara das técnicas</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="activity-submission">
+            <h2><i class="fas fa-upload"></i> Enviar Atividade</h2>
+            <form id="activity-form" class="submission-form">
+              <div class="form-group">
+                <label for="video-file">
+                  <i class="fas fa-video"></i> Arquivo de Vídeo
+                </label>
+                <input type="file" id="video-file" accept="video/*" required>
+                <small>Tamanho máximo: 500MB</small>
+              </div>
+
+              <div class="form-group">
+                <label for="comments">
+                  <i class="fas fa-comment"></i> Comentários (opcional)
+                </label>
+                <textarea id="comments" rows="4" placeholder="Adicione observações sobre sua atividade..."></textarea>
+              </div>
+
+              <div class="form-actions">
+                <a href="atividades.html" class="btn btn-outline">Cancelar</a>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-paper-plane"></i>
+                  Enviar Atividade
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="dashboard-section">
+        <h2><i class="fas fa-video"></i> Vídeo Demonstrativo</h2>
+        <div class="video-container">
+          <div class="video-placeholder">
+            <i class="fas fa-play-circle"></i>
+            <p>Vídeo: Técnicas de Resgate - Demonstração</p>
+            <span>Duração: 15:30</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+  <script>
+    // Check authentication
+    checkAuth('aluno');
+
+    // Handle form submission
+    document.getElementById('activity-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const videoFile = document.getElementById('video-file').files[0];
+      const comments = document.getElementById('comments').value;
+      
+      if (!videoFile) {
+        alert('Por favor, selecione um arquivo de vídeo.');
+        return;
+      }
+
+      // Simulate upload
+      alert('Atividade enviada com sucesso! Aguarde a avaliação do instrutor.');
+      window.location.href = 'atividades.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - INSTITUTO FIRE</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="aluno-dashboard.html" class="nav-brand">
+        <i class="fas fa-fire-alt"></i>
+        <span>INSTITUTO FIRE</span>
+      </a>
+      
+      <div class="nav-menu">
+        <a href="aluno-dashboard.html" class="nav-link active">
+          <i class="fas fa-home"></i>
+          Dashboard
+        </a>
+        <a href="meus-cursos.html" class="nav-link">
+          <i class="fas fa-book"></i>
+          Meus Cursos
+        </a>
+        <a href="atividades.html" class="nav-link">
+          <i class="fas fa-tasks"></i>
+          Atividades
+        </a>
+        <a href="certificados.html" class="nav-link">
+          <i class="fas fa-certificate"></i>
+          Certificados
+        </a>
+      </div>
+      
+      <div class="nav-actions">
+        <button onclick="logout()" class="btn btn-outline">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div class="page-header">
+        <h1>Dashboard do Aluno</h1>
+        <p>Bem-vindo de volta, <span id="userName"></span>!</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #C62828 0%, #FFC107 100%);">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <div class="stat-content">
+            <h3>3</h3>
+            <p>Cursos Matriculados</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div class="stat-content">
+            <h3>1</h3>
+            <p>Cursos Concluídos</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="stat-content">
+            <h3>45h</h3>
+            <p>Horas de Estudo</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon" style="background: linear-gradient(135deg, #FF9800 0%, #FFC107 100%);">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div class="stat-content">
+            <h3>1</h3>
+            <p>Certificados</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Courses in Progress -->
+      <section class="dashboard-section">
+        <div class="section-header">
+          <h2>Cursos em Andamento</h2>
+          <a href="meus-cursos.html" class="btn btn-outline">Ver Todos</a>
+        </div>
+        <div class="courses-grid">
+          <div class="course-card">
+            <img src="firefighter-training-basic.jpg" alt="Curso">
+            <div class="course-content">
+              <span class="course-badge">Em Andamento</span>
+              <h3>Combate a Incêndios Básico</h3>
+              <p>Fundamentos essenciais de combate a incêndios</p>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 65%;"></div>
+              </div>
+              <p class="progress-text">65% concluído</p>
+              <a href="curso-aluno.html?id=1" class="btn btn-primary btn-block">Continuar</a>
+            </div>
+          </div>
+          
+          <div class="course-card">
+            <img src="first-aid-emergency.jpg" alt="Curso">
+            <div class="course-content">
+              <span class="course-badge">Em Andamento</span>
+              <h3>Primeiros Socorros</h3>
+              <p>Atendimento pré-hospitalar e emergências</p>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 30%;"></div>
+              </div>
+              <p class="progress-text">30% concluído</p>
+              <a href="curso-aluno.html?id=2" class="btn btn-primary btn-block">Continuar</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="dashboard-section">
+        <h2>Ações Rápidas</h2>
+        <div class="quick-actions">
+          <a href="cursos.html" class="action-card">
+            <i class="fas fa-search"></i>
+            <h3>Explorar Cursos</h3>
+            <p>Descubra novos cursos disponíveis</p>
+          </a>
+          <a href="atividades.html" class="action-card">
+            <i class="fas fa-clipboard-check"></i>
+            <h3>Minhas Atividades</h3>
+            <p>Veja suas atividades pendentes</p>
+          </a>
+          <a href="certificados.html" class="action-card">
+            <i class="fas fa-award"></i>
+            <h3>Certificados</h3>
+            <p>Acesse seus certificados</p>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+  <script>
+    // Check authentication
+    checkAuth('aluno');
+    
+    // Display user name
+    const userName = localStorage.getItem('userName') || 'Aluno';
+    document.getElementById('userName').textContent = userName;
+  </script>
+</body>
+</html>

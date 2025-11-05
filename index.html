@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Plataforma EAD do INSTITUTO FIRE - Cursos de capacitação profissional para bombeiros e equipes de emergência">
+  <meta name="keywords" content="bombeiros, treinamento, incêndio, primeiros socorros, emergência, EAD">
+  <meta name="author" content="INSTITUTO FIRE">
+  
+  <!-- Open Graph para redes sociais -->
+  <meta property="og:title" content="INSTITUTO FIRE - Plataforma EAD">
+  <meta property="og:description" content="Capacitação profissional de excelência para bombeiros e equipes de emergência">
+  <meta property="og:type" content="website">
+  
+  <title>INSTITUTO FIRE - Plataforma EAD para Bombeiros e Emergências</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+  <!-- Skip link para acessibilidade -->
+
+  <!-- Navigation -->
+  <header>
+    <nav class="navbar" aria-label="Navegação principal">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <img src="public/logoFire.png" alt="Logo Instituto FIRE" class="nav-logo" />
+          <span>INSTITUTO FIRE</span>
+        </div>
+        
+        <!-- Menu mobile -->
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu">
+          <span class="hamburger"></span>
+        </button>
+        
+        <div class="nav-menu" id="nav-menu">
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-btn" aria-expanded="false" aria-controls="cursos-dropdown">
+              <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+              Cursos
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="nav-dropdown-content" id="cursos-dropdown" role="menu">
+              <a href="curso-detalhes.html?id=1" role="menuitem">Combate a Incêndios Básico</a>
+              <a href="curso-detalhes.html?id=2" role="menuitem">Primeiros Socorros e Emergências</a>
+              <a href="curso-detalhes.html?id=3" role="menuitem">Investigação de Incêndios</a>
+              <a href="curso-detalhes.html?id=4" role="menuitem">Resgate Veicular</a>
+              <a href="curso-detalhes.html?id=5" role="menuitem">Materiais Perigosos (HAZMAT)</a>
+              <a href="curso-detalhes.html?id=6" role="menuitem">Resgate Aquático</a>
+            </div>
+          </div>
+          
+          <a href="cursos.html" class="nav-link">Ver Todos os Cursos</a>
+        </div>
+        
+        <div class="nav-actions">
+          <a href="aluno-registro.html" class="btn btn-outline">
+            <i class="fas fa-user-plus" aria-hidden="true"></i>
+            <span>Registrar</span>
+          </a>
+          <a href="aluno-login.html" class="btn btn-outline">
+            <i class="fas fa-user" aria-hidden="true"></i>
+            <span>Login Aluno</span>
+          </a>
+          <a href="admin-login.html" class="btn btn-primary">
+            <i class="fas fa-user-shield" aria-hidden="true"></i>
+            <span>Login Admin</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-shield-alt" aria-hidden="true"></i>
+          Treinamento Profissional
+        </div>
+        <h1 id="hero-title" class="hero-title">INSTITUTO FIRE</h1>
+        <p class="hero-subtitle">Plataforma de Ensino à Distância para Bombeiros</p>
+        <p class="hero-description">
+          Capacitação profissional de excelência para bombeiros e equipes de emergência.
+          Cursos certificados, instrutores especializados e conteúdo atualizado.
+        </p>
+        <div class="hero-buttons">
+          <a href="aluno-login.html" class="btn btn-primary btn-lg">
+            <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+            Acessar Plataforma
+          </a>
+          <a href="cursos.html" class="btn btn-outline btn-lg">
+            <i class="fas fa-book-open" aria-hidden="true"></i>
+            Ver Cursos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carousel -->
+    <section class="carousel-section" aria-labelledby="cursos-destaque">
+      <div class="container">
+        <h2 id="cursos-destaque" class="section-title">Cursos em Destaque</h2>
+        
+        <div class="carousel" role="region" aria-label="Galeria de cursos em destaque">
+          <button class="carousel-btn carousel-prev" onclick="prevSlide()" aria-label="Slide anterior">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          
+          <div class="carousel-track">
+            <div class="carousel-slide active" role="group" aria-roledescription="slide" aria-label="1 de 3">
+              <img src="/public/firefighter-training-basic.jpg" alt="Bombeiros em treinamento de combate a incêndios" loading="lazy">
+              <div class="carousel-content">
+                <span class="carousel-badge">Básico</span>
+                <h3>Combate a Incêndios Básico</h3>
+                <p>Fundamentos essenciais de combate a incêndios</p>
+                <div class="carousel-meta">
+                  <span><i class="fas fa-book" aria-hidden="true"></i> 4 módulos</span>
+                  <span><i class="fas fa-clock" aria-hidden="true"></i> 20h</span>
+                </div>
+                <a href="curso-detalhes.html?id=1" class="btn btn-primary">Ver Curso</a>
+              </div>
+            </div>
+            
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
+              <img src="/public/first-aid-emergency.jpg" alt="Equipe realizando primeiros socorros em vítima" loading="lazy">
+              <div class="carousel-content">
+                <span class="carousel-badge">Intermediário</span>
+                <h3>Primeiros Socorros e Emergências</h3>
+                <p>Atendimento pré-hospitalar e emergências médicas</p>
+                <div class="carousel-meta">
+                  <span><i class="fas fa-book" aria-hidden="true"></i> 5 módulos</span>
+                  <span><i class="fas fa-clock" aria-hidden="true"></i> 25h</span>
+                </div>
+                <a href="curso-detalhes.html?id=2" class="btn btn-primary">Ver Curso</a>
+              </div>
+            </div>
+            
+            <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
+              <img src="/public/fire-investigation.jpg" alt="Perito investigando cena de incêndio" loading="lazy">
+              <div class="carousel-content">
+                <span class="carousel-badge">Avançado</span>
+                <h3>Investigação de Incêndios</h3>
+                <p>Técnicas de perícia e investigação de causas</p>
+                <div class="carousel-meta">
+                  <span><i class="fas fa-book" aria-hidden="true"></i> 4 módulos</span>
+                  <span><i class="fas fa-clock" aria-hidden="true"></i> 30h</span>
+                </div>
+                <a href="curso-detalhes.html?id=3" class="btn btn-primary">Ver Curso</a>
+              </div>
+            </div>
+          </div>
+          
+          <button class="carousel-btn carousel-next" onclick="nextSlide()" aria-label="Próximo slide">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+          </button>
+          
+          <div class="carousel-dots" role="tablist">
+            <button class="dot active" onclick="goToSlide(0)" role="tab" aria-label="Ir para slide 1" aria-selected="true"></button>
+            <button class="dot" onclick="goToSlide(1)" role="tab" aria-label="Ir para slide 2" aria-selected="false"></button>
+            <button class="dot" onclick="goToSlide(2)" role="tab" aria-label="Ir para slide 3" aria-selected="false"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" aria-labelledby="recursos-titulo">
+      <div class="container">
+        <h2 id="recursos-titulo" class="section-title visually-hidden">Recursos da Plataforma</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-certificate" aria-hidden="true"></i>
+            </div>
+            <h3>Certificação Oficial</h3>
+            <p>Certificados reconhecidos e válidos em todo território nacional</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-video" aria-hidden="true"></i>
+            </div>
+            <h3>Videoaulas HD</h3>
+            <p>Conteúdo em alta qualidade com instrutores especializados</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-tasks" aria-hidden="true"></i>
+            </div>
+            <h3>Atividades Práticas</h3>
+            <p>Exercícios e simulações para fixação do conteúdo</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line" aria-hidden="true"></i>
+            </div>
+            <h3>Acompanhamento</h3>
+            <p>Monitore seu progresso e desempenho em tempo real</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <i class="fas fa-fire-alt" aria-hidden="true"></i>
+          <span>INSTITUTO FIRE</span>
+        </div>
+        <p>&copy; 2025 INSTITUTO FIRE. Todos os direitos reservados.</p>
+        <nav class="footer-nav" aria-label="Navegação do rodapé">
+          <a href="politica-privacidade.html">Política de Privacidade</a>
+          <a href="termos-uso.html">Termos de Uso</a>
+          <a href="contato.html">Contato</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="carousel.js"></script>
+  <script>
+    // Menu mobile toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.querySelector('.nav-toggle');
+      const navMenu = document.getElementById('nav-menu');
+      
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+          const isExpanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !isExpanded);
+          navMenu.classList.toggle('active');
+        });
+      }
+      
+      // Dropdown menu toggle
+      const dropdownBtn = document.querySelector('.nav-dropdown-btn');
+      const dropdownContent = document.getElementById('cursos-dropdown');
+      
+      if (dropdownBtn && dropdownContent) {
+        dropdownBtn.addEventListener('click', function() {
+          const isExpanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', !isExpanded);
+          dropdownContent.classList.toggle('active');
+        });
+        
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', function(event) {
+          if (!dropdownBtn.contains(event.target) && !dropdownContent.contains(event.target)) {
+            dropdownBtn.setAttribute('aria-expanded', 'false');
+            dropdownContent.classList.remove('active');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

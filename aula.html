@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula - INSTITUTO FIRE</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="aluno-dashboard.html" class="nav-brand">
+        <i class="fas fa-fire-alt"></i>
+        <span>INSTITUTO FIRE</span>
+      </a>
+      
+      <div class="nav-menu">
+        <a href="aluno-dashboard.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          Dashboard
+        </a>
+        <a href="meus-cursos.html" class="nav-link active">
+          <i class="fas fa-book"></i>
+          Meus Cursos
+        </a>
+      </div>
+      
+      <div class="nav-actions">
+        <button onclick="logout()" class="btn btn-outline">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <div id="lessonContent">
+        <!-- Lesson content will be loaded here -->
+      </div>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+  <script src="courses-data.js"></script>
+  <script>
+    // Check authentication
+    checkAuth('aluno');
+
+    // Get lesson ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const lessonId = urlParams.get('id');
+
+    function findLesson() {
+      for (const module of MODULES_DATA) {
+        const lesson = module.lessons.find(l => l.id === lessonId);
+        if (lesson) {
+          return { lesson, module };
+        }
+      }
+      return null;
+    }
+
+    function loadLesson() {
+      const result = findLesson();
+      
+      if (!result) {
+        document.getElementById('lessonContent').innerHTML = `
+          <div class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i>
+            Aula não encontrada
+          </div>
+        `;
+        return;
+      }
+
+      const { lesson, module } = result;
+      const course = COURSES_DATA.find(c => c.id === module.courseId);
+
+      let contentHTML = '';
+      
+      if (lesson.contentType === 'video') {
+        contentHTML = `
+          <div class="video-container">
+            <div class="video-placeholder">
+              <i class="fas fa-play-circle"></i>
+              <p>Vídeo: ${lesson.title}</p>
+              <small>Duração: ${lesson.duration} minutos</small>
+            </div>
+          </div>
+        `;
+      } else if (lesson.contentType === 'reading') {
+        contentHTML = `
+          <div class="reading-content">
+            <div class="content-box">
+              <h3>Conteúdo de Leitura</h3>
+              <p>Este é o conteúdo de leitura para a aula "${lesson.title}".</p>
+              <p>Em uma aplicação real, o conteúdo completo da aula seria exibido aqui.</p>
+            </div>
+          </div>
+        `;
+      } else if (lesson.contentType === 'pdf') {
+        contentHTML = `
+          <div class="pdf-content">
+            <div class="content-box">
+              <i class="fas fa-file-pdf"></i>
+              <h3>Material em PDF</h3>
+              <p>${lesson.title}</p>
+              <button class="btn btn-primary">
+                <i class="fas fa-download"></i>
+                Baixar PDF
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById('lessonContent').innerHTML = `
+        <a href="curso-aluno.html?id=${course.id}" class="back-link">
+          <i class="fas fa-arrow-left"></i> Voltar para o Curso
+        </a>
+        
+        <div class="lesson-header">
+          <div class="breadcrumb">
+            <span>${course.title}</span>
+            <i class="fas fa-chevron-right"></i>
+            <span>${module.title}</span>
+          </div>
+          <h1>${lesson.title}</h1>
+        </div>
+
+        ${contentHTML}
+
+        <div class="lesson-actions">
+          <button class="btn btn-outline">
+            <i class="fas fa-arrow-left"></i>
+            Aula Anterior
+          </button>
+          <button class="btn btn-primary">
+            Próxima Aula
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      `;
+    }
+
+    loadLesson();
+  </script>
+</body>
+</html>

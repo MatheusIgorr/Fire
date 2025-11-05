@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso - INSTITUTO FIRE</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="aluno-dashboard.html" class="nav-brand">
+        <i class="fas fa-fire-alt"></i>
+        <span>INSTITUTO FIRE</span>
+      </a>
+      
+      <div class="nav-menu">
+        <a href="aluno-dashboard.html" class="nav-link">
+          <i class="fas fa-home"></i>
+          Dashboard
+        </a>
+        <a href="meus-cursos.html" class="nav-link active">
+          <i class="fas fa-book"></i>
+          Meus Cursos
+        </a>
+        <a href="atividades.html" class="nav-link">
+          <i class="fas fa-tasks"></i>
+          Atividades
+        </a>
+        <a href="certificados.html" class="nav-link">
+          <i class="fas fa-certificate"></i>
+          Certificados
+        </a>
+      </div>
+      
+      <div class="nav-actions">
+        <button onclick="logout()" class="btn btn-outline">
+          <i class="fas fa-sign-out-alt"></i>
+          Sair
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <a href="meus-cursos.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Voltar para Meus Cursos
+      </a>
+      
+      <div id="courseContent">
+        <!-- Course content will be loaded here -->
+      </div>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+  <script src="courses-data.js"></script>
+  <script>
+    // Check authentication
+    checkAuth('aluno');
+
+    // Get course ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id');
+
+    function loadCourse() {
+      const course = COURSES_DATA.find(c => c.id === courseId);
+      
+      if (!course) {
+        document.getElementById('courseContent').innerHTML = `
+          <div class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i>
+            Curso não encontrado
+          </div>
+        `;
+        return;
+      }
+
+      const modules = MODULES_DATA.filter(m => m.courseId === courseId);
+      const progress = Math.floor(Math.random() * 100); // Mock progress
+
+      document.getElementById('courseContent').innerHTML = `
+        <div class="course-header">
+          <div class="course-header-content">
+            <h1>${course.title}</h1>
+            <p>${course.description}</p>
+            <div class="progress-section">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: ${progress}%;"></div>
+              </div>
+              <p class="progress-text">${progress}% concluído</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-modules">
+          <h2><i class="fas fa-list"></i> Módulos do Curso</h2>
+          ${modules.map((module, index) => `
+            <div class="module-card">
+              <div class="module-header">
+                <h3>
+                  <span class="module-number">${index + 1}</span>
+                  ${module.title}
+                </h3>
+                <span class="module-lessons">${module.lessons.length} aulas</span>
+              </div>
+              <p class="module-description">${module.description}</p>
+              <ul class="lessons-list">
+                ${module.lessons.map(lesson => `
+                  <li>
+                    <a href="aula.html?id=${lesson.id}" class="lesson-link">
+                      <i class="fas fa-${lesson.contentType === 'video' ? 'play-circle' : lesson.contentType === 'reading' ? 'book-open' : lesson.contentType === 'pdf' ? 'file-pdf' : 'tasks'}"></i>
+                      ${lesson.title}
+                      <span class="lesson-duration">${lesson.duration} min</span>
+                    </a>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    loadCourse();
+  </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Curso - INSTITUTO FIRE</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <i class="fas fa-fire-alt"></i>
+        <span>INSTITUTO FIRE</span>
+      </a>
+      
+      <div class="nav-menu">
+        <a href="index.html" class="nav-link">Início</a>
+        <a href="cursos.html" class="nav-link">Cursos</a>
+      </div>
+      
+      <div class="nav-actions">
+        <a href="aluno-registro.html" class="btn btn-outline">
+          <i class="fas fa-user-plus"></i>
+          Registrar
+        </a>
+        <a href="aluno-login.html" class="btn btn-primary">
+          <i class="fas fa-sign-in-alt"></i>
+          Login
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Course Details -->
+  <section class="course-details-section">
+    <div class="container">
+      <a href="cursos.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Voltar para Cursos
+      </a>
+      
+      <div class="course-details-grid" id="courseDetails">
+        <!-- Course details will be loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <i class="fas fa-fire-alt"></i>
+          <span>INSTITUTO FIRE</span>
+        </div>
+        <p>&copy; 2025 INSTITUTO FIRE. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="courses-data.js"></script>
+  <script>
+    // Get course ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id');
+
+    function loadCourseDetails() {
+      const course = COURSES_DATA.find(c => c.id === courseId);
+      
+      if (!course) {
+        document.getElementById('courseDetails').innerHTML = `
+          <div class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i>
+            Curso não encontrado
+          </div>
+        `;
+        return;
+      }
+
+      const modules = MODULES_DATA.filter(m => m.courseId === courseId);
+
+      document.getElementById('courseDetails').innerHTML = `
+        <div class="course-hero">
+          <img src="${course.thumbnail}" alt="${course.title}" class="course-hero-image">
+          <div class="course-hero-content">
+            <span class="course-badge">${course.level}</span>
+            <h1>${course.title}</h1>
+            <p class="course-hero-description">${course.description}</p>
+            <div class="course-stats">
+              <div class="stat">
+                <i class="fas fa-book"></i>
+                <span>${course.modulesCount} Módulos</span>
+              </div>
+              <div class="stat">
+                <i class="fas fa-clock"></i>
+                <span>${Math.floor(course.duration / 60)} Horas</span>
+              </div>
+              <div class="stat">
+                <i class="fas fa-video"></i>
+                <span>${modules.reduce((acc, m) => acc + m.lessons.length, 0)} Aulas</span>
+              </div>
+            </div>
+            <div class="course-actions">
+              <a href="aluno-registro.html" class="btn btn-primary btn-lg">
+                <i class="fas fa-user-plus"></i>
+                Inscrever-se no Curso
+              </a>
+              <a href="aluno-login.html" class="btn btn-outline btn-lg">
+                <i class="fas fa-sign-in-alt"></i>
+                Já tenho conta
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-modules">
+          <h2><i class="fas fa-list"></i> Conteúdo do Curso</h2>
+          <div class="modules-list">
+            ${modules.map((module, index) => `
+              <div class="module-card">
+                <div class="module-header">
+                  <h3>
+                    <span class="module-number">${index + 1}</span>
+                    ${module.title}
+                  </h3>
+                  <span class="module-lessons">${module.lessons.length} aulas</span>
+                </div>
+                <p class="module-description">${module.description}</p>
+                <ul class="lessons-list">
+                  ${module.lessons.map(lesson => `
+                    <li>
+                      <i class="fas fa-${lesson.contentType === 'video' ? 'play-circle' : lesson.contentType === 'reading' ? 'book-open' : lesson.contentType === 'pdf' ? 'file-pdf' : 'tasks'}"></i>
+                      ${lesson.title}
+                      <span class="lesson-duration">${lesson.duration} min</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    loadCourseDetails();
+  </script>
+</body>
+</html>
